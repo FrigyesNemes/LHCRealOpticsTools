@@ -1,0 +1,51 @@
+<OpticsDescription label="Optics_Description.xml">
+	<Optics label="3.5*m">
+		<Strength>
+			<db_base_dir value="db5/"\>
+			
+	                <name="strength_file" value="IR1/IP1_beta_3.50.str"\>
+	                <name="strength_file" value="IR2/3.5TeV/ip2_0.00889_beta3.50m.str"\>
+        	        <name="strength_file" value="IR5/IP5_beta_3.50.str"\>
+                	<name="strength_file" value="IR8/3.5TeV/ip8_0.00882_beta3.50m.str"\>
+		<\Strength>
+		<Higher_order_effects>
+			<name="chromaticity_dbase_dir" value="/afs/cern.ch/eng/sl/online/om/repository/malabaup/"\>
+			
+	                <name="correction_subdbase_dir" value="correction_harmonics/BEAM1_3.5TeV3.5m/"\>
+	                <name="absolute_harmonics_dbase_dir" value="absolute_harmonics/BEAM1_3.5TeV3.5m/"\>
+	                <name="correction_file" value="B2_corr_setting_3.5TeV3.5m_O1-15_S1.mad"\>
+	                <name="coupling_correction_file" value="coupling_corr_aftertune_thick_model_3.5TeV3.5m_S1_b1.mad"\>
+	                <name="chromaticity_correction" value="tune_chrom_corr_thick_model_3.5TeV3.5m_S1.b1.mad"\>
+	                <name="abs_correction_MB" value="harmonics_3.5TeV3.5m_MB_O2-15_S1.tfs"\>
+	                <name="abs_correction_MQ" value="harmonics_3.5TeV3.5m_MQ_O2-15_S1.tfs"\>
+	                <name="abs_correction_MC" value="ptc_total_corr1_3.5TeV3.5m_b1_MC_O2-15_S1.tfs"\>
+		<\Higher_order_effects>
+	<\Optics>
+
+	<Optics label="90*m">
+		<Strength>
+			<name="db_base_dir" value="db5/"\>
+			
+	                <name="strength_file" value="HiBeta/IP5_beta90_2010.str"\>
+		<\Strength>
+	<\Optics>
+	
+	<Optics label="0.65*m">
+		<Strength>
+			<name="db_base_dir" value="db5/"\>
+			
+	                <name="strength_file" value="IP1_beta_0.65.str"\>
+			<name="strength_file" value="IR5/IP5_beta_0.65.str"\>
+		<\Strength>
+	<\Optics>
+	
+	<Optics label="1535*m">
+		<Strength>
+			<name="db_base_dir" value="db5/"\>
+			
+	                <name="strength_file" value="HiBeta/IP5_beta1535_b1.str"\>
+		<\Strength>
+	<\Optics>
+
+	
+<\OpticsDescription>

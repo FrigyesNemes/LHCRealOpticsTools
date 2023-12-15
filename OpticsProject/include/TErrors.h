@@ -1,0 +1,11 @@
+const int ERR_UNKNOWN_PROJECT = 1 ;
+const int ERR_UNDEFINED_KEYWORD = 2 ;
+const int ERR_UNDEFINED_PROJECT = 3 ;
+const int ERR_CANNOT_OPEN_CONFIG_FILE = 4 ;
+const int ERR_INCORRECT_PARAMETERS = 5 ;
+const int ERR_INCORRECT_VERBOSITY = 6 ;
+const int BETA_STAR_NOT_SUPPORTED = 7 ;
+const int NO_CHROMATICITY_FILES = 8 ;
+const int NO_COMMAND = 9 ;
+const int ERR_WRONG_MATCH_TYPE = 9 ;
+const int ERR_TFS_JOB_NUMBER_CONFLICT = 10 ;

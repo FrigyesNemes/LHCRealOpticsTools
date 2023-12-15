@@ -1,0 +1,142 @@
+! Links definitions
+option, warn,info;
+!system,"ln -fns /afs/cern.ch/eng/lhc/optics/runII/2016 db5";
+
+is_thin=0;
+
+! Sequence definition
+Option, -echo,-warn,-info;
+call,file="/afs/cern.ch/eng/lhc/optics/runII/2016/lhc_as-built.seq";
+!if (is_thin==1){call,file="db5/toolkit/slice.madx";};
+Option, -echo,warn,info;
+
+!if (is_thin==0){
+!  call, file="db5/opt_inj.madx";
+!  call, file="db5/opt_800_10000_800_3000.madx";
+!} else {
+!  call, file="db5/opt_inj_thin.madx";
+!  call, file="db5/opt_800_10000_800_3000_thin.madx";
+!};
+
+call, file="/afs/cern.ch/eng/lhc/optics/runII/2016/opt_inj_colltunes.madx";
+!call, file="opt_400_10000_400_3000.madx";
+!call, file="../New_files_2016_04_20/opt_400_10000_400_3000_totem5.madx";
+px.ip5=185e-6;
+y.ip5=5.500000000000000e-04;
+beta.ip5=0.400 ;
+
+!call, file="/afs/cern.ch/exp/totem/scratch/fnemes/cmssw_code/CMSSW_4_2_4/tools/LHCRealOpticsTools/Mappings/LHC_Run_II/TOTEM_sign_conversion_2011_08_03_with_Huberts_rule.madx";
+!call, file="/afs/cern.ch/exp/totem/scratch/fnemes/cmssw_code/CMSSW_4_2_4/tools/LHCRealOpticsTools/Mappings/LHC_Run_II/TOTEM_magnet_settings_beam1_with_kickers.seq";
+call, file="temporary_perturbation.madx";
+call, file="perturbations.madx";
+
+! Matching part start
+
+MQXA.1R5, K1 := ((LSA.MQXA.1R5)*(PERTSTRMQXA.1R5 + DMQXA.1R5)) * (1), polarity=1;
+
+select, flag=error, clear;
+select,flag=error, pattern=MQXA.1R5;
+ealign, dpsi= PERTDPSIMQXA.1R5 + DPSIMQXA.1R5   ;
+MCBXH.1R5, KICK := (LSA.MCBXH.1R5*(1.0 + DELTA_K_MCBXH.1R5)) * (1), polarity=1;
+MCBXV.1R5, KICK := (LSA.MCBXV.1R5*(1.0 + 0)) * (1), polarity=1;
+MQXB.A2R5, K1 := ((LSA.MQXB.A2R5)*(PERTSTRMQXB.A2R5 + DMQXB.A2R5)) * (1), polarity=-1;
+
+select, flag=error, clear;
+select,flag=error, pattern=MQXB.A2R5;
+ealign, dpsi= PERTDPSIMQXB.A2R5 + DPSIMQXB.A2R5   ;
+MCBXH.2R5, KICK := (LSA.MCBXH.2R5*(1.0 + DELTA_K_MCBXH.2R5)) * (1), polarity=1;
+MCBXV.2R5, KICK := (LSA.MCBXV.2R5*(1.0 + 0)) * (1), polarity=1;
+MQXB.B2R5, K1 := ((LSA.MQXB.B2R5)*(PERTSTRMQXB.B2R5 + DMQXB.B2R5)) * (1), polarity=-1;
+
+select, flag=error, clear;
+select,flag=error, pattern=MQXB.B2R5;
+ealign, dpsi= PERTDPSIMQXB.B2R5 + DPSIMQXB.B2R5   ;
+MQSX.3R5, K1S := (LSA.MQSX.3R5*(1.0 + 0)) * (1), polarity=1;
+MQXA.3R5, K1 := ((LSA.MQXA.3R5)*(PERTSTRMQXA.3R5 + DMQXA.3R5)) * (1), polarity=1;
+
+select, flag=error, clear;
+select,flag=error, pattern=MQXA.3R5;
+ealign, dpsi= PERTDPSIMQXA.3R5 + DPSIMQXA.3R5   ;
+MCBXH.3R5, KICK := (LSA.MCBXH.3R5*(1.0 + DELTA_K_MCBXH.3R5)) * (1), polarity=1;
+MCBXV.3R5, KICK := (LSA.MCBXV.3R5*(1.0 + 0)) * (1), polarity=1;
+MCSX.3R5, KNL := {0, 0, (LSA.MCSX.3R5*(1.0 + 0)) * (1)*l.MCSX, 0, 0, 0}, polarity=1;
+MCTX.3R5, KNL := {0, 0, 0, 0, 0, (LSA.MCTX.3R5*(1.0 + 0)) * (1)*l.MCTX}, polarity=1;
+MCOSX.3R5, KSL := {0, 0, 0, (LSA.MCOSX.3R5*(1.0 + 0)) * (1)*l.MCOSX}, polarity=1;
+MCOX.3R5, KNL := {0, 0, 0, (LSA.MCOX.3R5*(1.0 + 0)) * (1)*l.MCOX}, polarity=1;
+MCSSX.3R5, KSL := {0, 0, (LSA.MCSSX.3R5*(1.0 + 0)) * (1)*l.MCSSX, 0}, polarity=1;
+MBXW.A4R5, K0 := (((LSA.MBXW.A4R5)*(1.0 + 0)) * (-1)) , ANGLE := ( ((LSA.MBXW.A4R5)*(1.0 + 0)) * (-1) * l.MBXW ), polarity=-1;
+MBXW.B4R5, K0 := (((LSA.MBXW.B4R5)*(1.0 + 0)) * (-1)) , ANGLE := ( ((LSA.MBXW.B4R5)*(1.0 + 0)) * (-1) * l.MBXW ), polarity=-1;
+MBXW.C4R5, K0 := (((LSA.MBXW.C4R5)*(1.0 + 0)) * (-1)) , ANGLE := ( ((LSA.MBXW.C4R5)*(1.0 + 0)) * (-1) * l.MBXW ), polarity=-1;
+MBXW.D4R5, K0 := (((LSA.MBXW.D4R5)*(1.0 + 0)) * (-1)) , ANGLE := ( ((LSA.MBXW.D4R5)*(1.0 + 0)) * (-1) * l.MBXW ), polarity=-1;
+MBXW.E4R5, K0 := (((LSA.MBXW.E4R5)*(1.0 + 0)) * (-1)) , ANGLE := ( ((LSA.MBXW.E4R5)*(1.0 + 0)) * (-1) * l.MBXW ), polarity=-1;
+MBXW.F4R5, K0 := (((LSA.MBXW.F4R5)*(1.0 + 0)) * (-1)) , ANGLE := ( ((LSA.MBXW.F4R5)*(1.0 + 0)) * (-1) * l.MBXW ), polarity=-1;
+MBRC.4R5.B1, K0 := (((LSA.MBRC.4R5.B1)*(1.0 + 0)) * (1)) , ANGLE := ( ((LSA.MBRC.4R5.B1)*(1.0 + 0)) * (1) * l.MBRC ), polarity=1;
+MCBYV.A4R5.B1, KICK := (LSA.MCBYV.A4R5.B1*(1.0 + 0)) * (1), polarity=1;
+MCBYH.4R5.B1, KICK := (LSA.MCBYH.4R5.B1*(1.0 + 0)) * (1), polarity=1;
+MCBYV.B4R5.B1, KICK := (LSA.MCBYV.B4R5.B1*(1.0 + 0)) * (1), polarity=1;
+MQY.4R5.B1, K1 := ((LSA.MQY.4R5.B1)*(PERTSTRMQY.4R5.B1 + DMQY.4R5.B1)) * (1), polarity=-1;
+
+select, flag=error, clear;
+select,flag=error, pattern=MQY.4R5.B1;
+ealign, dpsi= PERTDPSIMQY.4R5.B1 + DPSIMQY.4R5.B1   ;
+MQML.5R5.B1, K1 := ((LSA.MQML.5R5.B1)*(PERTSTRMQML.5R5.B1 + DMQML.5R5.B1)) * (1), polarity=1;
+
+select, flag=error, clear;
+select,flag=error, pattern=MQML.5R5.B1;
+ealign, dpsi= PERTDPSIMQML.5R5.B1 + DPSIMQML.5R5.B1   ;
+MCBCH.5R5.B1, KICK := (LSA.MCBCH.5R5.B1*(1.0 + 0)) * (1), polarity=1;
+
+! Matching part end
+
+call, file="/afs/cern.ch/exp/totem/scratch/fnemes/cmssw_code/CMSSW_4_2_4/tools/LHCRealOpticsTools/Settings/2016/Beam_energy_6p5_TeV_beta_star_0p4_m_LHC_Run_II_2016_CTPPS/LSA_2016_04_20.str";
+
+! Cycle
+seqedit,sequence=lhcb1;flatten;cycle,start=IP5;endedit;
+
+PI=3.141592654;
+NORM_TRANS_EMITTANCE_M_RAD=3.5e-6;
+PROTON_GAMMA=(6500/9.382720460000000e-01);
+
+BSX:=sqrt(table(twiss,BETX)*NORM_TRANS_EMITTANCE_M_RAD/PROTON_GAMMA);
+BSY:=sqrt(table(twiss,BETY)*NORM_TRANS_EMITTANCE_M_RAD/PROTON_GAMMA);
+LX:=sqrt(table(twiss,BETX)*table(twiss,ip5,BETX))*sin(2*PI*table(twiss,MUX));
+LY:=sqrt(table(twiss,BETY)*table(twiss,ip5,BETY))*sin(2*PI*table(twiss,MUY));
+
+! Beam definition
+beam, sequence=lhcb1, bv= 1, energy=6500,  particle=proton,
+  npart=1.2e11,kbunch=2748, ex=7.29767146889e-09,ey=7.29767146889e-09;
+beam, sequence=lhcb2, bv=-1, energy=6500,  particle=proton,
+  npart=1.2e11,kbunch=2748, ex=7.29767146889e-09,ey=7.29767146889e-09;
+
+
+!set,format={"9.6f","-5s"};
+!select,flag=twiss,clear;
+!select,flag=twiss, pattern="IP[1258]$",column=name,betx,bety,x,y,px,py;
+
+!use, sequence=lhcb1;twiss;write,table=twiss;
+!use, sequence=lhcb2;twiss;write,table=twiss;
+
+! Twiss
+set,format="22.15e";
+select,flag=twiss,clear;
+select,flag=twiss,pattern="^IP5";
+select,flag=twiss,pattern="^tcl*";
+select,flag=twiss,pattern="^bpm*";
+select,flag=twiss,pattern="^xrp*",column=name,s,x,y,px,py,betx,bety,mux,muy,dx,dy,re11,re12,re13,re14,re21,re22,re23,re24,re31,re32,re33,re34,re41,re42,re43,re44,BSX,BSY;
+
+  use, sequence=lhcb1;
+  use, period=lhcb1,range=IP5/MQML.6R5.B1;
+
+call, file="momentum_loss.madx";
+call, file="temporary_perturbation_b1.madx";
+
+  twiss, RMATRIX, BETX=beta.ip5, BETY=beta.ip5, X=x.ip5+DELTA_X, Y=y.ip5, PX=DELTA_PX_B1, PY=py.ip5, DELTAP=(DELTADELTAP + DDELTADELTAP_B1 + TOTEMDELTAP), file=result/twiss_lhcb1.tfs;
+
+PLOT, TABLE=TWISS, COLOUR= 100, HAXIS= S, VAXIS1=re34, file=result/twiss_lhcb1_plot_RE34;
+PLOT, TABLE=TWISS, COLOUR= 100, HAXIS= S, VAXIS1=DX, file=result/twiss_lhcb1_plot_DX;
+PLOT, TABLE=TWISS, COLOUR= 100, HAXIS= S, VAXIS1=X, file=result/twiss_lhcb1_plot_DX;
+
+call, file="/afs/cern.ch/work/f/fnemes/tmp/OpticsProject/LHCRealOpticsTools/LHCRealOpticsTools/OpticsProject/Project_files/2016/Beam_energy_6p5_TeV_beta_star_0p4_m_LHC_Run_II_2016_CTPPS/New_files_2016_04_20/PrintRealIP5Settings.madx";
+
+stop;
+
