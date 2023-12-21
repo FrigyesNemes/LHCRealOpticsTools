@@ -1,0 +1,2 @@
+/eos/cms/store/group/phys_pps/alignment/2022/
+/eos/cms/store/group/phys_pps/alignment/2023/
