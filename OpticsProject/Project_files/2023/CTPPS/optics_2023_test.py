@@ -6,10 +6,10 @@ process = cms.Process('CTPPSTest', eras.Run3)
 from conditions import *
 
 def SetConditions(process):
-    UseOpticsGT(process)
+    #UseOpticsGT(process)
     UseLHCInfoGT(process)
     UseAlignmentGT(process)
-    #UseOpticsFile(process, "sqlite_file:/afs/cern.ch/user/w/wcarvalh/public/CTPPS/optical_functions/PPSOpticalFunctions_2023_calib_v1.db", "PPSOpticalFunctions_test")
+    UseOpticsFile(process, "sqlite_file:/afs/cern.ch/user/w/wcarvalh/public/CTPPS/optical_functions/PPSOpticalFunctions_2023_calib_v1.db", "PPSOpticalFunctions_test")
 
 process.load('Validation.CTPPS.ctppsLHCInfoPlotter_cfi')
 
@@ -70,6 +70,8 @@ process.schedule = cms.Schedule(
 
 from SimPPS.Configuration.Utils import setupPPSDirectSim
 setupPPSDirectSim(process)
+
+del process.es_prefer_composrc
 
 process.ctppsBeamParametersFromLHCInfoESSource.vtxOffsetX45 = 0.
 process.ctppsBeamParametersFromLHCInfoESSource.vtxOffsetY45 = 0.
